@@ -60,10 +60,11 @@ class _MyStateFullWid extends State<MyStateFullWidget>{
 
   void modificarLista (int page){
 
-    lugares.add("7","Palacio de kk","cat kk","Calle kk"  )
+    //final Lugar l;
+
+    lugares.add( new Lugar('7','Palacio de kk','cat kk','Calle kk'));
+
   }
-
-
 
 }
 

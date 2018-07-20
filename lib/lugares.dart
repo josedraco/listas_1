@@ -5,46 +5,46 @@ class Lugar {
   final String situacion;
 
 
-  const Lugar({this.id, this.name, this.categoria, this.situacion});
+  Lugar(this.id, this.name, this.categoria, this.situacion);
 
 }
 
 List<Lugar> lugares = [
-  const Lugar(
-      id: "1",
-      name: "Palacio de Valdecarzana",
-      categoria: "Historico",
-      situacion: "Calle Sol, 1, 33402 Avilés, Asturias",
+   Lugar(
+      "1",
+      "Palacio de Valdecarzana",
+      "Historico",
+      "Calle Sol, 1, 33402 Avilés, Asturias",
   ),
-  const Lugar(
-      id: "2",
-      name: "Palacio de Ferrera",
-      categoria: "Historico",
-      situacion: "Calle Sol, 1, 33402 Avilés, Asturias",
+   Lugar(
+      "2",
+      "Palacio de Ferrera",
+      "Historico",
+      "Calle Sol, 1, 33402 Avilés, Asturias",
   ),
-  const Lugar(
-      id: "3",
-      name: "Palacio de Macua",
-      categoria: "Historico",
-      situacion: "Calle Sol, 1, 33402 Avilés, Asturias",
+   Lugar(
+      "3",
+      "Palacio de Macua",
+      "Historico",
+      "Calle Sol, 1, 33402 Avilés, Asturias",
   ),
-  const Lugar(
-      id: "4",
-      name: "Palacio de Balsera",
-      categoria: "Historico",
-      situacion: "Calle Sol, 1, 33402 Avilés, Asturias",
+   Lugar(
+      "4",
+      "Palacio de Balsera",
+      "Historico",
+      "Calle Sol, 1, 33402 Avilés, Asturias",
   ),
-  const Lugar(
-      id: "5",
-      name: "Palacio de Llano Ponte",
-      categoria: "Historico",
-      situacion: "Calle Sol, 1, 33402 Avilés, Asturias",
+   Lugar(
+      "5",
+      "Palacio de Llano Ponte",
+      "Historico",
+      "Calle Sol, 1, 33402 Avilés, Asturias",
   ),
-  const Lugar(
-      id: "6",
-      name: "Palacio de Camposagrado",
-      categoria: "Historico",
-      situacion: "Calle Sol, 1, 33402 Avilés, Asturias",
+   Lugar(
+      "6",
+      "Palacio de Camposagrado",
+      "Historico",
+      "Calle Sol, 1, 33402 Avilés, Asturias",
   ),
 
 ];
