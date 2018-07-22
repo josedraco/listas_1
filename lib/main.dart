@@ -46,37 +46,26 @@ class RandomWordsState extends State<RandomWords> {
         padding: const EdgeInsets.all(16.0),
         itemCount: lugares.length,
         itemBuilder: (context, i) {
-          //if (i.isOdd) return new Divider();
+          if (i.isOdd) new Divider();
 
-          //final index = i ~/ 2;
-
-          print ('i= $i');
-          //print ('lugares.length = $lugares.length');
-
-          //if (i >= _suggestions.length) {
-          // _suggestions.addAll(generateWordPairs().take(10));
+          //print ('i= $i');
           _suggestions.addAll(lugares);
-          //}
+
           final pair = _suggestions[i];
           final alreadySaved = _saved.contains(pair);
           //return _buildRow(_suggestions[index]);
           return new ListTile(
             title: new Text(pair.name,style: _biggerFont,),
-            trailing: new Icon(
-              alreadySaved ? Icons.favorite : Icons.favorite_border,
+            trailing: new IconButton(
+              icon: alreadySaved ? Icon(Icons.favorite) : Icon(Icons.favorite_border),
               color: alreadySaved ? Colors.red : null,
-            ),
-            onTap: () {
-              setState(
-                    () {
-                  if (alreadySaved) {
-                    _saved.remove(pair);
-                  } else {
-                    _saved.add(pair);
-                  }
-                },
+              onPressed: () {setState( () {
+                  if (alreadySaved) {_saved.remove(pair);}
+                  else {_saved.add(pair); }
+                  },
               );
             },
+          ),
           );
         },
       ),
