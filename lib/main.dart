@@ -1,70 +1,109 @@
+
+
 import 'package:flutter/material.dart';
-import 'package:listas_1/lugares.dart';
+import 'lugares.dart';
 
 void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Startup Name Generator',
       theme: new ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: Colors.white,
       ),
-      home: new MyStateFullWidget(),
+      home: new RandomWords(),
     );
   }
 }
 
-class MyStateFullWidget extends StatefulWidget
-{
+class RandomWords extends StatefulWidget {
   @override
-  _MyStateFullWid createState() => new _MyStateFullWid();
-
+  createState() => new RandomWordsState();
 }
 
-class _MyStateFullWid extends State<MyStateFullWidget>{
+class RandomWordsState extends State<RandomWords> {
+
+//  final _suggestions = <WordPair>[];
+//  final _saved = new Set<WordPair>();
+
+  final _suggestions = <Lugar>[];
+  final _saved = new Set<Lugar>();
+
+  final _biggerFont = const TextStyle(fontSize: 18.0);
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return new Scaffold(
-      appBar:  AppBar(
-        title: new Text("Prueba LISTAS"),
+      appBar: new AppBar(
+        title: new Text('Startup Name Generator'),
+        actions: <Widget>[
+          new IconButton(icon: new Icon(Icons.list), onPressed: _pushSaved)
+        ],
       ),
-      body: ListView.builder(
+      body: new ListView.builder(
+        padding: const EdgeInsets.all(16.0),
         itemCount: lugares.length,
-        padding: const EdgeInsets.all(15.0),
-        itemBuilder: (context, position){
-          return Column(
-            children: <Widget>[
-              Divider(height: 5.0,),
-              ListTile(
-                title: Text(lugares[position].name),
-              )
-            ],
+        itemBuilder: (context, i) {
+          //if (i.isOdd) return new Divider();
+
+          //final index = i ~/ 2;
+
+          print ('i= $i');
+          //print ('lugares.length = $lugares.length');
+
+          //if (i >= _suggestions.length) {
+          // _suggestions.addAll(generateWordPairs().take(10));
+          _suggestions.addAll(lugares);
+          //}
+          final pair = _suggestions[i];
+          final alreadySaved = _saved.contains(pair);
+          //return _buildRow(_suggestions[index]);
+          return new ListTile(
+            title: new Text(pair.name,style: _biggerFont,),
+            trailing: new Icon(
+              alreadySaved ? Icons.favorite : Icons.favorite_border,
+              color: alreadySaved ? Colors.red : null,
+            ),
+            onTap: () {
+              setState(
+                    () {
+                  if (alreadySaved) {
+                    _saved.remove(pair);
+                  } else {
+                    _saved.add(pair);
+                  }
+                },
+              );
+            },
           );
         },
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0,
-        onTap: modificarLista,
-        items: [
-          new BottomNavigationBarItem(icon: new Icon(Icons.add), title: new Text('Add'), backgroundColor: Colors.lightGreen),
-          new BottomNavigationBarItem(icon: new Icon(Icons.restaurant), title: new Text('Minus'), backgroundColor: Colors.red),
-        ]
       ),
     );
   }
 
-  void modificarLista (int page){
+  void _pushSaved() {
+    Navigator.of(context).push(
+      new MaterialPageRoute(
+        builder: (context) {
+          final tiles = _saved.map(
+                (pair) {
+              return new ListTile(
+                title: new Text(pair.name, style: _biggerFont, ),
+              );
+            },
+          );
+          final divided = ListTile.divideTiles(context: context, tiles: tiles,).toList();
 
-    //final Lugar l;
-
-    lugares.add( new Lugar('7','Palacio de kk','cat kk','Calle kk'));
-
+          return new Scaffold(
+            appBar: new AppBar(
+              title: new Text('Saved Suggestions'),
+            ),
+            body: new ListView(children: divided),
+          );
+        },
+      ),
+    );
   }
-
 }
-
