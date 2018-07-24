@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'lugares.dart';
+import 'favoritos.dart';
 
 void main() => runApp(new MyApp());
 
@@ -25,9 +26,6 @@ class RandomWords extends StatefulWidget {
 
 class RandomWordsState extends State<RandomWords> {
 
-//  final _suggestions = <WordPair>[];
-//  final _saved = new Set<WordPair>();
-
   final _suggestions = <Lugar>[];
   final _saved = new Set<Lugar>();
 
@@ -39,7 +37,8 @@ class RandomWordsState extends State<RandomWords> {
       appBar: new AppBar(
         title: new Text('Startup Name Generator'),
         actions: <Widget>[
-          new IconButton(icon: new Icon(Icons.list), onPressed: _pushSaved)
+          //new IconButton(icon: new Icon(Icons.list), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => new Favoritos(_saved)),);})
+          new IconButton(icon: new Icon(Icons.list), onPressed: _pushSaved),
         ],
       ),
       body: new ListView.builder(
@@ -72,27 +71,9 @@ class RandomWordsState extends State<RandomWords> {
     );
   }
 
-  void _pushSaved() {
-    Navigator.of(context).push(
-      new MaterialPageRoute(
-        builder: (context) {
-          final tiles = _saved.map(
-                (pair) {
-              return new ListTile(
-                title: new Text(pair.name, style: _biggerFont, ),
-              );
-            },
-          );
-          final divided = ListTile.divideTiles(context: context, tiles: tiles,).toList();
-
-          return new Scaffold(
-            appBar: new AppBar(
-              title: new Text('Saved Suggestions'),
-            ),
-            body: new ListView(children: divided),
-          );
-        },
-      ),
-    );
+  void _pushSaved(){
+    final route = new MaterialPageRoute(builder: (context) =>  new Favoritos(_saved).getPage(context));
+    Navigator.of(context).push(route);
   }
+
 }
